@@ -1,6 +1,13 @@
 <script setup>
 import { ref } from "vue";
+import { useRoute } from "vue-router";
 import logo from "@/assets/logo.png";
+
+const isActiveLink = (routePath) => {
+  const route = useRoute();
+  return route.path === routePath;
+}
+
 </script>
 
 <template>
@@ -15,11 +22,36 @@ import logo from "@/assets/logo.png";
           </router-link>
           <div class="md:ml-auto">
             <div class="flex space-x-2">
-              <router-link to="/"
-                class="text-white bg-green-900 hover:bg-gray-900 hover:text-white rounded-md px-3 py-2">Home</router-link>
+              <router-link to="/" :class="[
+                isActiveLink('/')
+                  ? 'bg-green-900'
+                  : 'hover:bg-green-900 hover:text-white',
+                'text-white',
+                'hover:bg-green-900',
+                'hover:text-white',
+                'rounded-md px-3 py-2'
+              ]">
+                Home</router-link>
               <router-link to="/jobs"
-                class="text-white hover:bg-green-900 hover:text-white rounded-md px-3 py-2">Jobs</router-link>
-              <router-link to="/addJobs" class="text-white hover:bg-green-900 hover:text-white rounded-md px-3 py-2">Add
+              :class="[
+                isActiveLink('/jobs')
+                  ? 'bg-green-900'
+                  : 'hover:bg-green-900 hover:text-white',
+                'text-white',
+                'hover:bg-green-900',
+                'hover:text-white',
+                'rounded-md px-3 py-2'
+              ]">Jobs</router-link>
+              <router-link to="/addJobs" 
+              :class="[
+                isActiveLink('/addJobs')
+                  ? 'bg-green-900'
+                  : 'hover:bg-green-900 hover:text-white',
+                'text-white',
+                'hover:bg-green-900',
+                'hover:text-white',
+                'rounded-md px-3 py-2'
+              ]">Add
                 Job</router-link>
             </div>
           </div>
