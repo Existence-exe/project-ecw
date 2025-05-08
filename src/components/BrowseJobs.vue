@@ -1,8 +1,11 @@
 <script setup>
 import JobListings from "@/components/JobListings.vue";
-import JobData from '@/jobs2.json' with { type: 'json' };
-import {ref} from 'vue';
-const data = ref(JobData);
+import {ref, onMounted} from 'vue';
+import axios from 'axios';
+import PusleLoader from "vue-spinner/src/PulseLoader.vue";
+
+const isLoading = ref(false);
+const data = ref([], );
 
 defineProps({
     limit: Number,
@@ -12,7 +15,17 @@ defineProps({
     }
 })
 
-
+onMounted(async () => {
+    isLoading.value = true;
+    try {
+        const response = await axios.get('http://localhost:5000/jobs');
+        data.value = response.data;
+    } catch (error) {
+        console.error(error);
+    } finally { 
+        isLoading.value = false;
+    }
+})
 </script>
 
 <template>
@@ -21,7 +34,10 @@ defineProps({
             <h2 class="text-3xl font-bold text-green-500 mb-6 text-center">
                 Browse Jobs
             </h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div v-if="isLoading" class="text-center text-gray-500">
+                <PusleLoader/>
+            </div>
+            <div v-else class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <JobListings v-for="jobdata in data.slice(0, limit || data.length)" :key="jobdata.id" :job="jobdata"></JobListings>
             </div>
         </div>
