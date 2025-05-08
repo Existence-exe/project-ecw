@@ -3,11 +3,13 @@ import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
 import axios from 'axios';
 import { ref, onMounted,computed } from 'vue';
 import { useRoute } from 'vue-router';
+import BackButton from '@/components/BackButton.vue';
 
 const route = useRoute();
 const jobId = route.params.jobId;
 const job = ref({});
 const isLoading = ref(true);
+
 
 onMounted(async () => {
   isLoading.value = true;
@@ -21,6 +23,9 @@ onMounted(async () => {
   }
 })
 
+
+
+
 const companyName = computed(() => job.value.company?.name || 'N/A');
 const companyDescription = computed(() => job.value.company?.description || 'No company description available');
 const contactEmail = computed(() => job.value.company?.contactEmail || 'N/A');
@@ -28,6 +33,7 @@ const contactPhone = computed(() => job.value.company?.contactPhone || 'N/A');
 </script>
 
 <template>
+  <BackButton />
   <section v-if="!isLoading.value" class="bg-green-50">
     <div class="container m-auto py-10 px-6">
       <div class="grid grid-cols-1 md:grid-cols-70/30 w-full gap-6">
@@ -87,7 +93,7 @@ const contactPhone = computed(() => job.value.company?.contactPhone || 'N/A');
             <router-link :to="`/jobs/edit/${jobId}`"
               class="bg-green-500 hover:bg-green-600 text-white text-center font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline mt-4 block">Edit
               Job</router-link>
-            <button
+            <button to="/jobs"
               class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline mt-4 block">
               Delete Job
             </button>
