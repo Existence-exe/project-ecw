@@ -1,33 +1,60 @@
 <script setup>
 import { reactive } from 'vue';
+import axios from 'axios';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 const form = reactive({
     type: 'Full-Time',
     title: '',
     description: '',
     salary: '',
-    location:'',
-    company:{
-        name:'',
-        description:'',
-        contactEmail:'',
-        contactPhone:'',
+    location: '',
+    company: {
+        name: '',
+        description: '',
+        contactEmail: '',
+        contactPhone: '',
     }
 
 })
 
+
+const handleSubmit = async () => {
+    const newJob = await {
+        title: form.title,
+        type: form.type,
+        description: form.description,
+        salary: form.salary,
+        location: form.location,
+        company: {
+            name: form.company.name,
+            description: form.company.description,
+            contactEmail: form.company.contactEmail,
+            contactPhone: form.company.contactPhone,
+        }
+    }
+    try { 
+        const add = await axios.post('http://localhost:5000/jobs', newJob);
+        router.push(`/jobs/${add.data.id}`);
+    } catch (error) {
+        console.error(error);
+    }
+
+}
 </script>
 
 <template>
     <section class="bg-green-50">
         <div class="container m-auto max-w-2xl py-24">
             <div class="bg-gray-100 px-6 py-8 mb-4 shadow-2xl rounded-md border-black m-4 md:m-0">
-                <form>
+                <form @submit.prevent="handleSubmit">
                     <h2 class="text-3xl text-center font-semibold mb-6">Add Job</h2>
 
                     <div class="mb-4">
                         <label for="type" class="block text-gray-700 font-bold mb-2">Job Type</label>
-                        <select v-model="form.type" id="type" name="type" class="border rounded w-full py-2 px-3" required>
+                        <select v-model="form.type" id="type" name="type" class="border rounded w-full py-2 px-3"
+                            required>
                             <option value="Full-Time">Full-Time</option>
                             <option value="Part-Time">Part-Time</option>
                             <option value="Remote">Remote</option>
@@ -37,18 +64,21 @@ const form = reactive({
 
                     <div class="mb-4">
                         <label class="block text-gray-700 font-bold mb-2">Job Listing Name</label>
-                        <input v-model="form.name" type="text" id="name" name="name" class="border rounded w-full py-2 px-3 mb-2"
-                            placeholder="eg. Beautiful Apartment In Miami" required />
+                        <input v-model="form.title" type="text" id="name" name="name"
+                            class="border rounded w-full py-2 px-3 mb-2" placeholder="eg. Beautiful Apartment In Miami"
+                            required />
                     </div>
                     <div class="mb-4">
                         <label for="description" class="block text-gray-700 font-bold mb-2">Description</label>
-                        <textarea v-model="form.description" id="description" name="description" class="border rounded w-full py-2 px-3" rows="4"
+                        <textarea v-model="form.description" id="description" name="description"
+                            class="border rounded w-full py-2 px-3" rows="4"
                             placeholder="Add any job duties, expectations, requirements, etc"></textarea>
                     </div>
 
                     <div class="mb-4">
                         <label for="type" class="block text-gray-700 font-bold mb-2">Salary</label>
-                        <select v-model="form.salary" id="salary" name="salary" class="border rounded w-full py-2 px-3" required>
+                        <select v-model="form.salary" id="salary" name="salary" class="border rounded w-full py-2 px-3"
+                            required>
                             <option value="Under $50K">under $50K</option>
                             <option value="$50K - $60K">$50 - $60K</option>
                             <option value="$60K - $70K">$60 - $70K</option>
@@ -67,16 +97,16 @@ const form = reactive({
                         <label class="block text-gray-700 font-bold mb-2">
                             Location
                         </label>
-                        <input v-model="form.location" type="text" id="location" name="location" class="border rounded w-full py-2 px-3 mb-2"
-                            placeholder="Company Location" required />
+                        <input v-model="form.location" type="text" id="location" name="location"
+                            class="border rounded w-full py-2 px-3 mb-2" placeholder="Company Location" required />
                     </div>
 
                     <h3 class="text-2xl mb-5">Company Info</h3>
 
                     <div class="mb-4">
                         <label for="company" class="block text-gray-700 font-bold mb-2">Company Name</label>
-                        <input v-model="form.company.name" type="text" id="company" name="company" class="border rounded w-full py-2 px-3"
-                            placeholder="Company Name" />
+                        <input v-model="form.company.name" type="text" id="company" name="company"
+                            class="border rounded w-full py-2 px-3" placeholder="Company Name" />
                     </div>
 
                     <div class="mb-4">
