@@ -104,6 +104,6 @@ const contactPhone = computed(() => job.value.company?.contactPhone || 'N/A');
   </section>
 
   <div v-else class="text-center text-gray-500">
-    <PusleLoader />
+    <PulseLoader />
   </div>
 </template>
