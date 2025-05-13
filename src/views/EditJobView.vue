@@ -1,10 +1,13 @@
 <script setup>
-import { reactive } from 'vue';
+import { reactive, onMounted, computed } from 'vue';
 import axios from 'axios';
-import { useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { useToast } from 'vue-toastification';
 
 const router = useRouter();
+const route = useRoute();
+const jid = route.params.jobId;
+
 const form = reactive({
     type: 'Full-Time',
     title: '',
@@ -20,10 +23,33 @@ const form = reactive({
 
 })
 
+const state = reactive({
+    job: {},
+    isLoading: true,
+})
+
+onMounted(async () => {
+    try {
+        const response = await axios.get(`http://localhost:5000/jobs/${jid}`);
+        state.job = response.data;
+        const company_details = computed(() => state.job.company || {});
+        form.title = state.job.title;
+        form.description = state.job.description;
+        form.salary = state.job.salary;
+        form.location = state.job.location;
+        form.company.name = company_details.value.name;
+        form.company.description = company_details.value.description;
+        form.company.contactEmail = company_details.value.contactEmail;
+        form.company.contactPhone = company_details.value.contactPhone;
+    } catch (error) {
+        console.error(error);
+    }
+})
+
 const toast = useToast();
 
 const handleSubmit = async () => {
-    const newJob = {
+    const updatedJob = {
         title: form.title,
         type: form.type,
         description: form.description,
@@ -36,13 +62,17 @@ const handleSubmit = async () => {
             contactPhone: form.company.contactPhone,
         }
     };
-    try { 
-        const response = await axios.post('http://localhost:5000/jobs', newJob);
-        router.push(`/jobs/${response.data.id}`);
-        toast.success('Job added successfully!',{duration: 10000});
+    try {
+        const confirm = window.confirm('Are you sure you want to edit this job? Changes cannot be undone.');
+        if (confirm) {
+            const response = await axios.put(`http://localhost:5000/jobs/${jid}`, updatedJob);
+            router.push(`/jobs/${response.data.id}`);
+            toast.success('Job updated successfully!', { duration: 10000 });
+        }
+
     } catch (error) {
         console.error(error);
-        toast.error('Failed to add job. Please try again.', {duration: 3000});
+        toast.error('Failed to add job. Please try again.', { duration: 3000 });
     }
 
 }
@@ -53,7 +83,7 @@ const handleSubmit = async () => {
         <div class="container m-auto max-w-2xl py-24">
             <div class="bg-gray-100 px-6 py-8 mb-4 shadow-2xl rounded-md border-black m-4 md:m-0">
                 <form @submit.prevent="handleSubmit">
-                    <h2 class="text-3xl text-center font-semibold mb-6">Add Job</h2>
+                    <h2 class="text-3xl text-center font-semibold mb-6">Update Job</h2>
 
                     <div class="mb-4">
                         <label for="type" class="block text-gray-700 font-bold mb-2">Job Type</label>
@@ -137,7 +167,7 @@ const handleSubmit = async () => {
                         <button
                             class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
                             type="submit">
-                            Add Job
+                            Update Job
                         </button>
                     </div>
                 </form>

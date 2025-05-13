@@ -57,18 +57,18 @@
       }
     },
     {
-      "id": "5",
       "title": "Full Stack Vue Developer",
       "type": "Full-Time",
       "description": "Exciting opportunity for a Full-Time Front-End Developer in bustling Atlanta, GA. We are seeking a talented individual with a passion for building elegant and scalable web applications. Join our team and make an impact!",
-      "location": "Atlanta, GA",
       "salary": "$90K - $100K",
+      "location": "Atlanta, GA",
       "company": {
         "name": "Browning Technologies",
         "description": "Browning Technologies is a rapidly growing technology company specializing in e-commerce solutions. We offer a dynamic and collaborative work environment where employees are encouraged to think creatively and innovate.",
         "contactEmail": "contact@consecteturadipisicing.com",
-        "contactPhone": "555-555-5555"
-      }
+        "contactPhone": "555-555-5556"
+      },
+      "id": "5"
     },
     {
       "id": "6",
@@ -183,34 +183,6 @@
       }
     },
     {
-      "id": "71d5",
-      "title": "Garrison Black",
-      "type": "Part-Time",
-      "description": "Rerum ut inventore a",
-      "salary": "$50K - $60K",
-      "location": "Nam quia fugiat alia",
-      "company": {
-        "name": "Odonnell and Roach Co",
-        "description": "Iusto illo nostrud n",
-        "contactEmail": "jebibul@mailinator.com",
-        "contactPhone": "+1 (532) 962-5615"
-      }
-    },
-    {
-      "id": "abf6",
-      "title": "Portia Gates",
-      "type": "Internship",
-      "description": "Reprehenderit molest",
-      "salary": "$150K - $175K",
-      "location": "In duis consequat N",
-      "company": {
-        "name": "Shields and Workman LLC",
-        "description": "Consequatur Adipisi",
-        "contactEmail": "tysyxe@mailinator.com",
-        "contactPhone": "+1 (879) 132-4888"
-      }
-    },
-    {
       "id": "5a64",
       "title": "Ebony Mccray",
       "type": "Part-Time",
@@ -250,6 +222,76 @@
         "description": "Quia rerum aliquid i",
         "contactEmail": "nozof@mailinator.com",
         "contactPhone": "+1 (791) 717-9578"
+      }
+    },
+    {
+      "title": "Calvin Henson",
+      "type": "Full-Time",
+      "description": "Officia possimus el",
+      "salary": "$150K - $175K",
+      "location": "Veniam facilis sunt",
+      "company": {
+        "name": "Hopkins Huber Co",
+        "description": "Dolore ad minus duis",
+        "contactEmail": "dinycu@mailinator.com",
+        "contactPhone": "+1 (436) 256-2353"
+      },
+      "id": "df43"
+    },
+    {
+      "id": "62f1",
+      "title": "Anika Cooke",
+      "type": "Remote",
+      "description": "Dignissimos suscipit",
+      "salary": "$150K - $175K",
+      "location": "Unde nisi laboriosam",
+      "company": {
+        "name": "Stein Fox Trading",
+        "description": "Aliquam qui voluptat",
+        "contactEmail": "revoj@mailinator.com",
+        "contactPhone": "+1 (744) 495-2323"
+      }
+    },
+    {
+      "id": "f0f5",
+      "title": "Calvin Warner",
+      "type": "Internship",
+      "description": "Consequatur Aut id ",
+      "salary": "$100K - $125K",
+      "location": "Vel error optio et ",
+      "company": {
+        "name": "Mayo and Macias LLC",
+        "description": "Cumque reprehenderit",
+        "contactEmail": "gysofymebe@mailinator.com",
+        "contactPhone": "+1 (927) 955-4498"
+      }
+    },
+    {
+      "id": "ad01",
+      "title": "Serena Chang",
+      "type": "Remote",
+      "description": "Sunt alias enim nul",
+      "salary": "$80K - $90K",
+      "location": "Dignissimos aut modi",
+      "company": {
+        "name": "Callahan and Hebert Traders",
+        "description": "Deleniti in dolore m",
+        "contactEmail": "bykol@mailinator.com",
+        "contactPhone": "+1 (204) 375-1729"
+      }
+    },
+    {
+      "id": "b322",
+      "title": "Hayden Tyson",
+      "type": "Internship",
+      "description": "Id asperiores et co",
+      "salary": "$90K - $100K",
+      "location": "Doloremque temporibu",
+      "company": {
+        "name": "Grimes and Lambert Associates",
+        "description": "At et quibusdam exer",
+        "contactEmail": "naki@mailinator.com",
+        "contactPhone": "+1 (972) 891-4938"
       }
     }
   ]
